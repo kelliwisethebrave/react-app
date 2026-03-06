@@ -1,9 +1,15 @@
 //import { Fragment } from "react";
 //import { MouseEvent } from "react";
 import { useState } from "react";
+interface ListGroupProps {
+  items: string[];
+  heading: string;
+  // (item: string => void)
+  onSelectItem: (item: string) => void; //onClick
+}
 
-function ListGroup() {
-  let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
+function ListGroup({ items, heading, onSelectItem }: ListGroupProps) {
+  //let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
   //let selectedIndex = 0;
 
   //hook
@@ -21,7 +27,7 @@ function ListGroup() {
 
   return (
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {items.length === 0 && <p>No item found</p>}
       <ul className="list-group">
         {items.map((item, index) => (
@@ -36,6 +42,7 @@ function ListGroup() {
             //onClick={(event) => console.log("Clicked " + item, index, event)
             onClick={() => {
               setSelectedIndex(index);
+              onSelectItem(item);
             }}
             //onClick={handleClick}
           >
